@@ -7,16 +7,16 @@ const BackgroundImage = () => {
 
 
     return (
-        <div>
+        <div style={{position: 'relative', width: '100%', height: '100vh'}}>
             <Image
                 src={image}
-                width={0}
-                height={0}
-                objectFit='cover'
-                objectPosition='center'
-                layout='fill'
-                className={'relative z-0'}
-                alt="Picture of the author"
+                alt="Country image"
+                fill
+                style={{
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                }}
+                className="relative z-0"
             />
         </div>
     );

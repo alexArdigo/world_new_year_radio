@@ -4,7 +4,7 @@ const RadioTitle = () => {
     const country = 'Japan'
 
     return (
-        <div className={'flex flex-col z-3 w-full h-32 items-center'}>
+        <div className={'flex flex-col z-3 w-full h-32 items-center justify-center'}>
             <h3>{radio}</h3>
             <p className={'text-2xl'}>{city}, {country}</p>
         </div>
