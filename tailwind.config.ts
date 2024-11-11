@@ -1,6 +1,12 @@
+import daisyui from 'daisyui';
 
 const config: {
-  plugins: (({addBase, theme}: { addBase: never; theme: never }) => void)[];
+  plugins: ((({addBase, theme}: { addBase: never; theme: never }) => void) | ReturnType<Plugin> | {
+    Config: DaisyUIConfig;
+    Theme: "light" | "dark" | "cupcake" | "bumblebee" | "emerald" | "corporate" | "synthwave" | "retro" | "cyberpunk" | "valentine" | "halloween" | "garden" | "forest" | "aqua" | "lofi" | "pastel" | "fantasy" | "wireframe" | "black" | "luxury" | "dracula" | "cmyk" | "autumn" | "business" | "acid" | "lemonade" | "night" | "coffee" | "winter" | "dim" | "nord" | "sunset";
+    CustomTheme: CustomTheme;
+    readonly default: ReturnType<Plugin>
+  })[];
   theme: {
     extend: {
       fontFamily: { sans: string[] };
@@ -65,6 +71,7 @@ const config: {
         }
       });
     },
+    daisyui
   ],
 };
 export default config;

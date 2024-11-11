@@ -11,7 +11,6 @@ export default function Home() {
         try {
             const response = await fetch(`/api/timezones/${gmtOffset}`);
             const data = await response.json();
-            console.log(response);
             setCountries(data);
             setError(null);
         } catch (error) {
