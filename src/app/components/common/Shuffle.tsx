@@ -1,12 +1,13 @@
 'use client';
 
 import Image from 'next/image';
+import {useLoadingStore} from "@/app/stores/LoadingStore";
 
-const Shuffle = ({fetch, width}) => {
+const Shuffle = ({fetch, country = '', width}) => {
+    const {setLoading} = useLoadingStore();
     const ICON_SIZE = 30;
     const ICON_PADDING = 50;
     const ABSOLUTE_PADDING = '15%';
-
 
     return (
             <div className={`flex ${width} h-14 relative`}>
@@ -24,7 +25,10 @@ const Shuffle = ({fetch, width}) => {
                         alt="Shuffle"
                         width={ICON_SIZE}
                         height={ICON_SIZE}
-                        onClick={fetch}
+                        onClick={() => {
+                            fetch(country)
+                            setLoading(true);
+                        }}
                         style={{width: ICON_SIZE, height: '100%'}}
                     />
                 </div>

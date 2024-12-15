@@ -6,8 +6,8 @@ const Radio = () => {
 
     return (
         <div className={'flex flex-col absolute w-4/5 '}>
-            <RadioTitle />
-            <RadioController />
+            <RadioTitle/>
+            <RadioController/>
         </div>
     );
 };

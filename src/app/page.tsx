@@ -1,14 +1,13 @@
-
 import BackgroundImage from "@/app/components/ui/MainBackgroundImage";
 import MainContent from "@/app/components/layout/MainContent";
 import './globals.css';
-
 export default function Home() {
+
     return (
-        <main >
+        <main>
             <div className="flex justify-center text-slate-50">
-                <BackgroundImage />
-                <MainContent />
+                <BackgroundImage/>
+                <MainContent/>
             </div>
         </main>
     );

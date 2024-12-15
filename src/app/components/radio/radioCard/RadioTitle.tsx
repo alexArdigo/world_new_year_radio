@@ -1,16 +1,14 @@
-import {useContext} from "react";
-import {CountryContext} from "@/app/providers/CountryContext";
+'use client'
+
+import {useRadioStore} from "@/app/stores/RadioStore";
 
 const RadioTitle = () => {
-    const useCountryContext = () => useContext(CountryContext);
-    const { country: {countryName}} = useCountryContext()
-    const radio = 'J1 Radio Gold'
-    const city = 'Tokyo'
+    const { radio: {title, subtitle} } = useRadioStore();
 
     return (
         <div className={'flex flex-col z-3 w-full h-32 items-center justify-center'}>
-            <h3>{radio}</h3>
-            <p className={'text-2xl'}>{city}, {countryName}</p>
+            <h3>{title}</h3>
+            <p className={'text-2xl'}>{subtitle}</p>
         </div>
     );
 };

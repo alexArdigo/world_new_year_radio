@@ -1,4 +1,4 @@
-'use client';
+
 import React from 'react';
 import CountdownTimer from "@/app/components/countdown/CountdownTimer";
 import CardBackground from "@/app/components/ui/CardBackground";

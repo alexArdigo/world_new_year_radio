@@ -12,11 +12,13 @@ const CountdownTimer = () => {
         const updateCountdown = () => {
 
             const now = new Date().getTime();
+
             const remaining = Math.floor((nextHour - now) / 1000);
             if (remaining <= 0) {
                 const newNextHour = new Date(nextHour);
                 newNextHour.setHours(newNextHour.getHours() + 1, 0, 0, 0);
                 setNextHour(newNextHour.getTime());
+
             } else {
                 setTimeRemaining(remaining);
             }
@@ -28,7 +30,7 @@ const CountdownTimer = () => {
         const countdownInterval = setInterval(updateCountdown, 1000);
 
         return () => clearInterval(countdownInterval);
-    }, []);
+    }, [nextHour]);
 
     // Format time for display
     const minutes = String(Math.floor(timeRemaining / 60)).padStart(2, '0');

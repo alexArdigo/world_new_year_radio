@@ -4,11 +4,11 @@ import Image from 'next/image';
 import {useState} from "react";
 import { playPauseAction } from "@/app/actions";
 
-const PlayPause = ({audioRef}) => {
+const PlayPause = ({audioRef, isPlaying, setIsPlaying}) => {
     const ICON_SIZE = 30;
     const ICON_PADDING = 50;
     const ABSOLUTE_PADDING = '15%';
-    const [isPlaying, setIsPlaying] = useState(false);
+
 
     const handlePlayPause = async () => {
         if (!audioRef.current) return;
