@@ -18,9 +18,9 @@ export default async function findTimezoneOffset() {
                 .match(/GMT([+-]\d{2}):(\d{2})/)
 
             if (offsetInMinutes) {
-                const hours = parseInt(offsetInMinutes[1], 10);
+                const hours: number = parseInt(offsetInMinutes[1], 10);
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                const minutes = parseInt(offsetInMinutes[2], 10);
+                const minutes: number = parseInt(offsetInMinutes[2], 10);
                 const totalOffsetInSeconds = (hours * 60 + minutes) * 60; // Convert to seconds
 
                 offsetsWith11PM.push(totalOffsetInSeconds);

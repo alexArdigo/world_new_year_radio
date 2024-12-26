@@ -17,7 +17,7 @@ const CountdownTimer = () => {
 
             const remaining = Math.floor((nextHour - now) / 1000);
 
-            if (countdown !== remaining){
+            if (countdown !== remaining) {
                 setCountdown(remaining);
             }
 
@@ -45,9 +45,9 @@ const CountdownTimer = () => {
 
     // Format time for display
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const minutes = String(Math.floor(timeRemaining / 60)).padStart(2, '0');
+    const minutes: string = String(Math.floor(timeRemaining / 60)).padStart(2, '0');
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const seconds = String(timeRemaining % 60).padStart(2, '0');
+    const seconds: string = String(timeRemaining % 60).padStart(2, '0');
 
     return (
         <div className={'flex absolute z-3 w-72 h-36 justify-evenly'}>
