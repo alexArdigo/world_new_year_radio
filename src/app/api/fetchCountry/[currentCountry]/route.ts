@@ -12,7 +12,7 @@ export async function GET(
 
     try {
         const gmtOffset = await findTimezoneOffset();
-        const data: Country = await getCountryByTimezone(gmtOffset, currentCountry);
+        const data = await getCountryByTimezone(gmtOffset, currentCountry) as Country;
 
         /*const data: Country = {
             countryCode: 'TR',

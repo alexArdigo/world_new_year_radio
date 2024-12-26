@@ -1,4 +1,4 @@
-export const handleTranslate = ( text, target, isCountryName = false ) => {
+export const handleTranslate = ( text: string, target: string, isCountryName: boolean = false ) => {
     const fetchData = async () => {
         const response = await fetch('/api/translate', {
             method: 'POST',

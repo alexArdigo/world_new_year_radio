@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import {RadioStore} from "@/app/types/ContextType";
+import {RadioStore, Radio} from "@/app/types/ContextType";
 
 export const useRadioStore = create<RadioStore>((set) => ({
     radio: {
@@ -9,7 +9,11 @@ export const useRadioStore = create<RadioStore>((set) => ({
     },
 
     setRadio: (radio) => {
-        set({ radio });
+        set((state) => ({
+            radio: typeof radio === 'function'
+                ? (radio as (prevState: Radio) => Radio)(state.radio)
+                : radio,
+        }));
     },
     fetchRadios: async (country) => {
         try {

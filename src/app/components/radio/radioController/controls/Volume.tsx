@@ -1,13 +1,18 @@
 import {useState} from "react";
+import {VolumeProps} from "@/app/types/ContextType";
 
-const Volume = ({audioRef, setIsMuted}) => {
+const Volume = ({audioRef, setIsMuted}: VolumeProps) => {
     const ICON_PADDING = 50;
     const [volume, setVolume] = useState(1);
 
-    const handleVolumeChange = (event) => {
+    const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newVolume = parseFloat(event.target.value);
         setVolume(newVolume);
-        audioRef.current.volume = newVolume; // Update the volume of the audio
+
+        if (audioRef.current) {
+            audioRef.current.volume = newVolume; // Update the volume of the audio
+        }
+
         if (newVolume === 0) {
             setIsMuted(true); // If volume is 0, set muted state to true
         } else {

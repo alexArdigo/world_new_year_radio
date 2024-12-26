@@ -12,10 +12,10 @@ export const useBackgroundImageStore = create<BackgroundImageStore>((set) => ({
     },
     fetchBackgroundImage: async (country) => {
         try {
-            const fetchData = await getBackgroundImage(country);
+            const fetchData = await getBackgroundImage(country, false);
 
             if (fetchData) {
-                set(state => ({
+                set(() => ({
                     backgroundImage: {
                         data: fetchData.data
                     }

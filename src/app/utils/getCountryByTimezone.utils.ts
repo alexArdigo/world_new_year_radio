@@ -1,6 +1,7 @@
 import {noRadioCountries} from "@/app/utils/noRadioCountries.utils";
+import {Country} from "@/app/types/ContextType";
 
-export async function getCountryByTimezone(gmtOffset, currentCountry) {
+export async function getCountryByTimezone(gmtOffset: number, currentCountry: string) {
 
     try {
         const apiKey = process.env.TIMEZONEDB_API_KEY;
@@ -8,7 +9,7 @@ export async function getCountryByTimezone(gmtOffset, currentCountry) {
         const response = await fetch(`${process.env.TIMEZONEDB_API_URL}/list-time-zone?key=${apiKey}&format=json`);
         const data = await response.json();
 
-        const filteredCountries = [...new Set(data.zones.filter(zone => {
+        const filteredCountries = [...new Set(data.zones.filter((zone: Country) => {
 
             if (zone.countryCode === 'PT' && gmtOffset === -3600) {
                 zone.countryName = 'Açores';

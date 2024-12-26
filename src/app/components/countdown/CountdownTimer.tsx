@@ -37,7 +37,11 @@ const CountdownTimer = () => {
         const countdownInterval = setInterval(updateCountdown, 1000);
 
         return () => clearInterval(countdownInterval);
-    }, [nextHour]);
+    }, [
+        nextHour,
+        countdown,
+        setCountdown
+    ]);
 
     // Format time for display
     const minutes = String(Math.floor(timeRemaining / 60)).padStart(2, '0');

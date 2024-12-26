@@ -1,6 +1,6 @@
+import {DataItem} from "@/app/types/ContextType";
 
 export default async function getRadioInfo(country: string, countryNameTranslated: string) {
-    console.log('country', country);
     if (country === 'Açores') {
         countryNameTranslated = 'Azores';
     }
@@ -30,9 +30,9 @@ export default async function getRadioInfo(country: string, countryNameTranslate
 
         const {hits: {hits: data}} = await response.json();
 
-        const filteredData = await data.filter(s => {
-            return s._source.type === 'channel'
-                && s._source.page.country.title.toLowerCase() === country.toLowerCase()
+        const filteredData = data.filter(({ _source }: DataItem) => {
+            return _source.type === 'channel' &&
+                _source.page?.country?.title?.toLowerCase() === country.toLowerCase();
         });
 
         const randomRadio = filteredData[Math.floor(Math.random() * filteredData.length)];

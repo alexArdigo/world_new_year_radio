@@ -16,9 +16,10 @@ export const useCountryStore = create<CountryStore>((set) => ({
         set({ country });
     },
     fetchCountries: async (country) => {
+        const { countryName } = country;
         try {
             //await new Promise(resolve => setTimeout(resolve, 3000));
-            const fetchData = await fetch(`/api/fetchCountry/${country ? country : 'initial'}`);
+            const fetchData = await fetch(`/api/fetchCountry/${countryName ? countryName : 'initial'}`);
             if (!fetchData.ok) {
                 throw new Error(fetchData.statusText);
             }

@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import {MuteProps} from "@/app/types/ContextType";
 
-const Mute = ({audioRef, isMuted, setIsMuted}) => {
+const Mute = ({audioRef, isMuted, setIsMuted}: MuteProps) => {
     const ICON_SIZE = 25;
     const ICON_PADDING = 50;
 

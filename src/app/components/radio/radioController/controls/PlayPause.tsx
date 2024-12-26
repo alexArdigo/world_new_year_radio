@@ -2,8 +2,9 @@
 
 import Image from 'next/image';
 import { playPauseAction } from "@/app/actions";
+import {PlayPauseProps} from "@/app/types/ContextType";
 
-const PlayPause = ({audioRef, isPlaying, setIsPlaying}) => {
+const PlayPause = ({audioRef, isPlaying, setIsPlaying}: PlayPauseProps) => {
     const ICON_SIZE = 30;
     const ICON_PADDING = 50;
     const ABSOLUTE_PADDING = '15%';

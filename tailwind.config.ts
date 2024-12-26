@@ -1,22 +1,23 @@
-import daisyui from 'daisyui';
+import daisyui from 'daisyui'
+
+// Define the plugin function type
+type PluginFunction = ({ addBase, theme }: {
+  addBase: (base: Record<string, any>) => void;
+  theme: (path: string) => any;
+}) => void;
 
 const config: {
-  plugins: ((({addBase, theme}: { addBase: never; theme: never }) => void) | ReturnType<Plugin> | {
-    Config: DaisyUIConfig;
-    Theme: "light" | "dark" | "cupcake" | "bumblebee" | "emerald" | "corporate" | "synthwave" | "retro" | "cyberpunk" | "valentine" | "halloween" | "garden" | "forest" | "aqua" | "lofi" | "pastel" | "fantasy" | "wireframe" | "black" | "luxury" | "dracula" | "cmyk" | "autumn" | "business" | "acid" | "lemonade" | "night" | "coffee" | "winter" | "dim" | "nord" | "sunset";
-    CustomTheme: CustomTheme;
-    readonly default: ReturnType<Plugin>
-  })[];
+  plugins: readonly [PluginFunction, typeof daisyui];
   theme: {
     extend: {
-      fontFamily: { sans: string[] };
-      blur: { xs: string };
-      fontSize: { h1: string; h2: string; h3: string; h4: string };
-      colors: { background: string; foreground: string };
-      fontWeight: { h1: string }
+      fontFamily: { sans: readonly [string, string] };
+      blur: { xs: "2px" };
+      fontSize: { h1: "8rem"; h2: "4.5rem"; h3: "3rem"; h4: "2.25rem" };
+      colors: { background: "var(--background)"; foreground: "var(--foreground)" };
+      fontWeight: { h1: "400" }
     }
   };
-  content: string[]
+  content: readonly [string, string, string]
 } = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -39,7 +40,7 @@ const config: {
         h1: '400',
       },
       fontFamily: {
-        sans: ['Zen Kaku Gothic New', 'sans-serif'], // Adds Roboto as the default sans font
+        sans: ['Zen Kaku Gothic New', 'sans-serif'],
       },
       blur: {
         xs: '2px',
@@ -73,5 +74,6 @@ const config: {
     },
     daisyui
   ],
-};
+} as const;
+
 export default config;

@@ -1,23 +1,13 @@
 'use client';
 
-import {createContext, useContext} from "react";
-import {CountryContextType} from "@/app/types/ContextType";
-import {useCountryStore} from "@/app/stores/CountryStore";
+import { createContext, useContext } from "react";
+import { CountryContextType } from "@/app/types/ContextType";
+import { useCountryStore } from "@/app/stores/CountryStore";
 
-const contextValue: CountryContextType = {
-    country: {
-        countryCode: '',
-        countryName: '',
-        zoneName: '',
-        gmtOffset: 0,
-        timestamp: 0
-    },
-    setCountry: (country) => {
-    }
-};
+// Create the CountryContext with no default value.
+export const CountryContext = createContext<CountryContextType | undefined>(undefined);
 
-export const CountryContext = createContext<CountryContextType>(contextValue);
-
+// Custom hook to use CountryContext safely
 export const useCountryContext = () => {
     const context = useContext(CountryContext);
     if (!context) {
@@ -26,11 +16,13 @@ export const useCountryContext = () => {
     return context;
 };
 
-export const CountryProvider = ({children}: { children: React.ReactNode }) => {
-    const {country, setCountry} = useCountryStore();
+// Provider component
+export const CountryProvider = ({ children }: { children: React.ReactNode }) => {
+    const country = useCountryStore((state) => state.country);
+    const setCountry = useCountryStore((state) => state.setCountry);
 
     return (
-        <CountryContext.Provider value={{country, setCountry}}>
+        <CountryContext.Provider value={{ country, setCountry }}>
             {children}
         </CountryContext.Provider>
     );
