@@ -44,9 +44,9 @@ const CountdownTimer = () => {
     ]);
 
     // Format time for display
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     const minutes: string = String(Math.floor(timeRemaining / 60)).padStart(2, '0');
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     const seconds: string = String(timeRemaining % 60).padStart(2, '0');
 
     return (
