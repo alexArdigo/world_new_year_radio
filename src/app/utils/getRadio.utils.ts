@@ -1,6 +1,7 @@
 import {NextResponse} from "next/server";
+import Radio from "@/app/components/radio";
 
-export default async function getRadio(radioID) {
+export default async function getRadio(radioID: typeof Radio) {
 
     const response = await fetch(`${process.env.RADIO_GARDEN_PATH}/ara/content/page/${radioID}`, {
         method: 'GET',

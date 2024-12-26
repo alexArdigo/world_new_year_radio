@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CardBackground = ({style}) => {
+const CardBackground = ({style}: { style: string }) => {
 
     return (
         <div

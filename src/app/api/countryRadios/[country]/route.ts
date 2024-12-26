@@ -1,5 +1,5 @@
 import {NextResponse} from "next/server";
-import {Radio} from "@/app/types/ContextType";
+import {Radio, Page} from "@/app/types/ContextType";
 import getRadioInfo from "@/app/utils/getRadioInfo.utils";
 import getRadio from "@/app/utils/getRadio.utils";
 import getZoneID from "@/app/utils/getZoneID.utils";
@@ -7,6 +7,8 @@ import getZoneID from "@/app/utils/getZoneID.utils";
 export const GET = async (
     request: Request,
     { params }: { params: { country: string } }) => {
+
+
     try {
 
         const {country} = params;
@@ -20,9 +22,10 @@ export const GET = async (
             const radio = await getRadio(zoneID);
 
             const filteredData = radio
-                .filter(({page}) => page.type === 'channel' && !page.title.includes('Sertanejo' || 'Sertaneja'))
-                .map(({page}) => {
-
+                .filter(({ page }: { page: Page }) => page.type === 'channel' &&
+                    !page.title.includes('Sertanejo') &&
+                    !page.title.includes('Sertaneja'))
+                .map(({ page }: { page: Page }) => {
                     const { title, place: cityName, url } = page;
                     const radioId = url.split('/').pop();
                     const subtitle = `${cityName.title}, ${countryNameTranslated}`

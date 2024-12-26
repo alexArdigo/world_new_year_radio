@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     const location = 'global'; // Can be region-specific, e.g., 'us-central1'
 
 
-    const targetLanguage = await countryLanguages[target] ?? 'pt-PT';
+    const targetLanguage = countryLanguages[target as keyof typeof countryLanguages] ?? 'pt-PT';
 
     const translateRequest  = {
         parent: `projects/${projectId}/locations/${location}`,
@@ -29,7 +29,6 @@ export async function POST(request: NextRequest) {
         const [translation] = await client.translateText(translateRequest );
 
         const translationText = translation?.translations?.[0]?.translatedText ?? '';
-        console.log('translationText', translationText);
         return NextResponse.json({ translationText });
     } catch (error) {
         console.error('Error translating:', error);

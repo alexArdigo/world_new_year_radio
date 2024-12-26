@@ -13,13 +13,13 @@ export type Country = {
 
 export type CountryContextType = {
     country: Country;
-    setCountry: React.Dispatch<React.SetStateAction<Country>>;
+    setCountry: (country: Country) => void;
 }
 
 export interface CountryStore {
     country: Country;
     setCountry: (country: Country) => void;
-    fetchCountries: (country) => Promise<void>;
+    fetchCountries: (country: Country) => Promise<void>;
 }
 // radio types
 
@@ -36,9 +36,62 @@ export type RadioContextType = {
 
 export interface RadioStore {
     radio: Radio;
-    setRadio: (radio: Radio) => void;
+    setRadio: React.Dispatch<React.SetStateAction<Radio>>;
     fetchRadios: (country: Country) => Promise<void>;
 }
+
+// Radio Id types
+
+export interface CountryPage {
+    country?: { title: string };
+}
+
+export interface Source {
+    type: string;
+    page?: CountryPage;
+}
+
+export interface DataItem {
+    _source: Source;
+}
+
+// PlayPause types
+
+export interface PlayPauseProps {
+    audioRef: React.RefObject<HTMLAudioElement>;
+    isPlaying: boolean;
+    setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+// Mute types
+export interface MuteProps {
+    audioRef: React.RefObject<HTMLAudioElement>;
+    isMuted: boolean;
+    setIsMuted: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+// Volume types
+export interface VolumeProps {
+    audioRef: React.RefObject<HTMLAudioElement>;
+    setIsMuted: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+// Page types
+
+export type Page = {
+    title: string;
+    subtitle: string;
+    place: {
+        title: string;
+    };
+    url: string;
+    type: string;
+}
+
+export interface HeaderProps {
+    fetchCountries: CountryStore['fetchCountries']; // Use the fetchCountries function type from CountryStore
+}
+
 
 // Background image types
 
@@ -54,7 +107,29 @@ export type BackgroundImageContextType = {
 export interface BackgroundImageStore {
     backgroundImage: BackgroundImage;
     setBackgroundImage: (backgroundImage: BackgroundImage) => void;
-    fetchBackgroundImage: (country) => Promise<void>;
+    fetchBackgroundImage: (country: Country) => Promise<void>;
+}
+
+// Pictures API types
+
+export type UnsplashResult = {
+    urls: { raw: string };
+};
+
+export type PixabayHit = {
+    largeImageURL: string;
+};
+
+export type PictureList = UnsplashResult[] | PixabayHit[];
+
+// Fetch types
+
+type FetchFunction = ((country: Country) => Promise<void>)
+
+export interface ShuffleProps {
+    fetch: FetchFunction;
+    country: Country;
+    width: number | string;
 }
 
 // Loading types
@@ -68,7 +143,7 @@ export interface LoadingContext {
 
 export interface LoadingPageContext {
     loadingPage: boolean;
-    setLoadingPage: (loadingPage: boolean) => void;
+    setLoadingPage: (loadingPage: boolean | ((prev: boolean) => boolean)) => void;
 }
 
 // Coundtdown types
@@ -87,3 +162,13 @@ export type TimeStampType = (marker: number) => {
         toCloseModal: number,
         toFinishCountdown: number,
 }
+
+// QueryBuilder types
+
+export interface QueryBuilderProps {
+    key: string | undefined,
+    q: string,
+    image_type: string,
+    category: string,
+}
+

@@ -37,10 +37,16 @@ const CountdownTimer = () => {
         const countdownInterval = setInterval(updateCountdown, 1000);
 
         return () => clearInterval(countdownInterval);
-    }, [nextHour]);
+    }, [
+        nextHour,
+        countdown,
+        setCountdown
+    ]);
 
     // Format time for display
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const minutes = String(Math.floor(timeRemaining / 60)).padStart(2, '0');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const seconds = String(timeRemaining % 60).padStart(2, '0');
 
     return (

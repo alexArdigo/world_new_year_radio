@@ -19,6 +19,7 @@ export default async function findTimezoneOffset() {
 
             if (offsetInMinutes) {
                 const hours = parseInt(offsetInMinutes[1], 10);
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const minutes = parseInt(offsetInMinutes[2], 10);
                 const totalOffsetInSeconds = (hours * 60 + minutes) * 60; // Convert to seconds
 

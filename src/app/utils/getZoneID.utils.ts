@@ -1,5 +1,5 @@
 
-export default async function getZoneID(zoneName) {
+export default async function getZoneID(zoneName: string) {
     try {
         const zone = zoneName.split('/').pop();
 

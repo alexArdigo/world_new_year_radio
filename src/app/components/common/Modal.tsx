@@ -39,14 +39,6 @@ export default function TransitionsModal() {
     } = timeStampZero(0);
     const [happyNewYearPhrase, setHappyNewYearPhrase] = useState('');
 
-    const newFetch = async () => await fetchCountries(country);
-
-    const handleTranslation = async () => {
-        const phraseToTranslate = `Happy New Year, ${country.countryName}!`;
-        const translatedPhrase = await handleTranslate(phraseToTranslate, country.countryName);
-        setHappyNewYearPhrase(translatedPhrase);
-    };
-
     React.useEffect(() => {
         // Set the width only on the client-side
         if (typeof window !== 'undefined') {
@@ -55,6 +47,14 @@ export default function TransitionsModal() {
     }, []);
 
     React.useEffect(() => {
+        const newFetch = async () => await fetchCountries(country);
+
+        const handleTranslation = async () => {
+            const phraseToTranslate = `Happy New Year, ${country.countryName}!`;
+            const translatedPhrase = await handleTranslate(phraseToTranslate, country.countryName);
+            setHappyNewYearPhrase(translatedPhrase);
+        };
+
         if ((countdown <= toOpenModalStart && countdown >= toOpenModalEnd) && !open) {
             handleTranslation();
             setOpen(true);
@@ -64,8 +64,16 @@ export default function TransitionsModal() {
             setHappyNewYearPhrase('');
             newFetch();
         }
-    }, [countdown]);
-    console.log(countdown);
+    }, [
+        countdown,
+        open,
+        toOpenModalStart,
+        toOpenModalEnd,
+        toCloseModal,
+        country,
+        fetchCountries
+    ]);
+
     return (
         <div>
             <Modal
@@ -83,10 +91,8 @@ export default function TransitionsModal() {
             >
                 <Fade in={open}>
                     <Box sx={style}>
-
                         {countdown === 0 || (countdown <= toFinishCountdown && countdown >= toCloseModal)
-                            ?
-                            <div className="flex h-full justify-center items-center">
+                            ? <div className="flex h-full justify-center items-center">
                                 <Confetti width={clientWidth} height={style.height}/>
                                 <div className="flex">
                                     <Typography
@@ -102,7 +108,6 @@ export default function TransitionsModal() {
                                             : `Happy New Year, ${country.countryName}!`}
                                     </Typography>
                                 </div>
-
                             </div>
                             : <>
                                 <Typography
@@ -128,9 +133,7 @@ export default function TransitionsModal() {
                                     {countdown % 100}
                                 </Typography>
                             </>
-
                         }
-
                     </Box>
                 </Fade>
             </Modal>
