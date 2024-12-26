@@ -1,12 +1,17 @@
 
-export default async function getRadioInfo(country: string) {
-
+export default async function getRadioInfo(country: string, countryNameTranslated: string) {
+    console.log('country', country);
     if (country === 'Açores') {
-        country = 'Azores';
+        countryNameTranslated = 'Azores';
     }
     if (country === 'Turkey') {
         country = 'Türkiye';
+        countryNameTranslated = 'Türkiye';
     }
+    if (country === 'Reunion') {
+        countryNameTranslated = 'Réunion';
+    }
+
 
     try {
         const fullUrl = `${process.env.RADIO_GARDEN_PATH}/search?q=${country}`;
@@ -35,7 +40,7 @@ export default async function getRadioInfo(country: string) {
         return {
             radioId: randomRadio._source.page.url.split('/').pop(),
             title: randomRadio._source.page.title,
-            subtitle: randomRadio._source.page.subtitle,
+            subtitle: `${randomRadio._source.page.subtitle.split(',')[0]}, ${countryNameTranslated}`,
         }
 
     } catch

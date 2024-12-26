@@ -10,10 +10,9 @@ export const GET = async (
     try {
 
         const {country} = params;
-        const {countryName, zoneName} = await JSON.parse(country);
+        const {countryName, countryNameTranslated, zoneName} = await JSON.parse(country);
 
-
-        const radioData = await getRadioInfo(countryName);
+        const radioData = await getRadioInfo(countryName, countryNameTranslated);
 
         if (!radioData) {
             const zoneID = await getZoneID(zoneName)
@@ -24,9 +23,9 @@ export const GET = async (
                 .filter(({page}) => page.type === 'channel' && !page.title.includes('Sertanejo' || 'Sertaneja'))
                 .map(({page}) => {
 
-                    const { title, country, place: cityName, url } = page;
+                    const { title, place: cityName, url } = page;
                     const radioId = url.split('/').pop();
-                    const subtitle = `${cityName.title}, ${country.title}`
+                    const subtitle = `${cityName.title}, ${countryNameTranslated}`
 
                     return {
                         radioId,
@@ -39,8 +38,6 @@ export const GET = async (
 
             return NextResponse.json({radioDataZone}, {status: 200});
         }
-
-
 
         return NextResponse.json({radioData}, {status: 200});
 

@@ -1,11 +1,12 @@
-import { NextResponse } from "next/server";
-import { buildQueryParams, randomPicture } from "@/app/utils/functions";
+import {NextResponse} from "next/server";
+import {buildQueryParams, randomPicture} from "@/app/utils/functions";
 
 export async function GET(
     request: Request,
-    { params }: { params: { country: string } }
+    {params}: { params: { country: string, PBError: string } }
 ) {
-    const { country } = params;
+    const {country, PBError} = params;
+    const hasPBError = PBError === 'true';
 
     const baseURL = process.env.PIXELBAY_PATH;
     const apiKey = process.env.PIXELBAY_API_KEY;
@@ -17,25 +18,30 @@ export async function GET(
     });
 
     const url = `${baseURL}?${queryParams}`;
-
+    let hits;
     try {
         // Pixabay fetch
-        const pixabayResponse = await fetch(url, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json"
+
+        if (!hasPBError) {
+            const pixabayResponse = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (!pixabayResponse.ok) {
+                console.error('Pixabay request failed:', pixabayResponse.statusText);
+                throw new Error('Pixabay request failed');
             }
-        });
 
-        if (!pixabayResponse.ok) {
-            console.error('Pixabay request failed:', pixabayResponse.statusText);
-            throw new Error('Pixabay request failed');
+            hits = (await pixabayResponse.json())?.hits ?? [];
+
         }
-
-        const { hits } = await pixabayResponse.json();
-
-        if (hits.length === 0) {
+        if (!hits?.length || hasPBError) {
             // Unsplash fallback
+            console.log('here');
+
             const unsplashUrl = `${process.env.UNSPLASH_PATH}/search/photos?page=1&query=${country}&client_id=${process.env.UNSPLASH_CLIENT_ID}`;
 
             const unsplashResponse = await fetch(unsplashUrl, {
@@ -50,21 +56,21 @@ export async function GET(
                 throw new Error('Unsplash request failed');
             }
 
-            const { results } = await unsplashResponse.json();
+            const {results} = await unsplashResponse.json();
 
             if (results.length === 0) {
-                return NextResponse.json({ error: 'No images found' }, { status: 404 });
+                return NextResponse.json({error: 'No images found'}, {status: 404});
             }
 
             const data = (await randomPicture(results)).urls.raw;
 
-            return NextResponse.json({ data }, { status: 200 });
+            return NextResponse.json({data}, {status: 200});
 
         } else {
 
             const data = (await randomPicture(hits)).largeImageURL;
 
-            return NextResponse.json({ data }, { status: 200 });
+            return NextResponse.json({data}, {status: 200});
         }
 
     } catch (error) {
@@ -72,6 +78,6 @@ export async function GET(
         return NextResponse.json({
             error: 'Failed to fetch image',
             details: error instanceof Error ? error.message : String(error)
-        }, { status: 500 });
+        }, {status: 500});
     }
 }

@@ -27,6 +27,7 @@ const MainContent = () => {
     }, [country]);
 
     return (
+
         <div className={'flex items-center flex-col absolute top-32'}>
             <CountryProvider value={{ country, setCountry }}>
                 <Header fetchCountries={fetchCountries} />
@@ -34,7 +35,6 @@ const MainContent = () => {
             </CountryProvider>
             <RadioCard />
             <Modal />
-
         </div>
     );
 };

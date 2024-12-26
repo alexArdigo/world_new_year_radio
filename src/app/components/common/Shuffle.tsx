@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import {useLoadingStore} from "@/app/stores/LoadingStore";
 
-const Shuffle = ({fetch, country = '', width}) => {
+const Shuffle = ({fetch, country = '', radioError, setRadioError, width}) => {
     const {setLoading} = useLoadingStore();
     const ICON_SIZE = 30;
     const ICON_PADDING = 50;
@@ -32,6 +32,7 @@ const Shuffle = ({fetch, country = '', width}) => {
                         style={{width: ICON_SIZE, height: '100%'}}
                     />
                 </div>
+
         </div>
     );
 };

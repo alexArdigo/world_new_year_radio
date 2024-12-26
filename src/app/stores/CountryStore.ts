@@ -1,10 +1,12 @@
 import { create } from 'zustand'
 import {CountryStore} from "@/app/types/ContextType";
+import {handleTranslate} from "@/app/utils/handleTranslate.utils";
 
 export const useCountryStore = create<CountryStore>((set) => ({
     country: {
         countryCode: '',
         countryName: '',
+        countryNameTranslated: '',
         zoneName: '',
         gmtOffset: 0,
         timestamp: 0
@@ -25,8 +27,10 @@ export const useCountryStore = create<CountryStore>((set) => ({
             if (data.countryName === 'Turkey') {
                 data.countryName = 'Türkiye';
             }
-            set({ country: data })
 
+            data.countryNameTranslated = await handleTranslate(data.countryName, 'pt-PT', true);
+
+            set({ country: data })
         } catch (error) {
             console.error('Error fetching radios:', error);
         }

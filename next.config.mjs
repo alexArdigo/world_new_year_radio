@@ -5,8 +5,8 @@ const nextConfig = {
         TIMEZONEDB_API_KEY: process.env.TIMEZONEDB_API_KEY,
     },
     i18n: {
-        locales: ['en', 'pt-PT'],
-        defaultLocale: 'en'
+        defaultLocale: 'en',
+        locales: ['en', 'pt-PT']
     },
     images: {
         remotePatterns: [

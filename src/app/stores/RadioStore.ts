@@ -21,6 +21,7 @@ export const useRadioStore = create<RadioStore>((set) => ({
             }
 
             const { radioData, radioDataZone } = await fetchData.json();
+
             set({ radio: radioData || radioDataZone });
         } catch (error) {
             console.error('Error fetching radios:', error);

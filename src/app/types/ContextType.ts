@@ -5,6 +5,7 @@ import React from "react";
 export type Country = {
     countryCode: string;
     countryName: string;
+    countryNameTranslated: string;
     zoneName: string;
     gmtOffset: number;
     timestamp: number
@@ -18,7 +19,7 @@ export type CountryContextType = {
 export interface CountryStore {
     country: Country;
     setCountry: (country: Country) => void;
-    fetchCountries: () => Promise<void>;
+    fetchCountries: (country) => Promise<void>;
 }
 // radio types
 
@@ -36,7 +37,7 @@ export type RadioContextType = {
 export interface RadioStore {
     radio: Radio;
     setRadio: (radio: Radio) => void;
-    fetchRadios: () => Promise<void>;
+    fetchRadios: (country: Country) => Promise<void>;
 }
 
 // Background image types
@@ -63,10 +64,26 @@ export interface LoadingContext {
     setLoading: (loading: boolean) => void;
 }
 
-// Modal
+// Loading types
 
-export type Modal = {
-    open: boolean;
-    onClose: () => void;
-    children: React.ReactNode;
+export interface LoadingPageContext {
+    loadingPage: boolean;
+    setLoadingPage: (loadingPage: boolean) => void;
+}
+
+// Coundtdown types
+
+export interface CountdownContext {
+    countdown: number;
+    setCountdown: (countdown: number) => void;
+}
+
+// TimeStamp types
+
+export type TimeStampType = (marker: number) => {
+        toOpenModalStart: number,
+        countdownStart: number,
+        toOpenModalEnd: number,
+        toCloseModal: number,
+        toFinishCountdown: number,
 }

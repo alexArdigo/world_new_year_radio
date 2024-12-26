@@ -1,12 +1,14 @@
 'use client';
 
 import {useEffect, useState} from "react";
+import {useCountdownStore} from "@/app/stores/CountdownStore";
 
 const CountdownTimer = () => {
     const P_TEXT_XL = 'text-xl';
     const INITIAL_HOUR = new Date().setHours(new Date().getHours() + 1, 0, 0, 0);
     const [nextHour, setNextHour] = useState<number>(INITIAL_HOUR);
     const [timeRemaining, setTimeRemaining] = useState<number>(0);
+    const {countdown, setCountdown} = useCountdownStore();
 
     useEffect(() => {
         const updateCountdown = () => {
@@ -14,6 +16,11 @@ const CountdownTimer = () => {
             const now = new Date().getTime();
 
             const remaining = Math.floor((nextHour - now) / 1000);
+
+            if (countdown !== remaining){
+                setCountdown(remaining);
+            }
+
             if (remaining <= 0) {
                 const newNextHour = new Date(nextHour);
                 newNextHour.setHours(newNextHour.getHours() + 1, 0, 0, 0);

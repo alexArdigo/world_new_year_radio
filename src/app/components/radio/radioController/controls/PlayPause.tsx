@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import {useState} from "react";
 import { playPauseAction } from "@/app/actions";
 
 const PlayPause = ({audioRef, isPlaying, setIsPlaying}) => {
