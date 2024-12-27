@@ -10,10 +10,8 @@ export async function POST(request: NextRequest) {
     const { text, target } = await request.json();
     const projectId = process.env.GOOGLE_PROJECT_ID!;
     const location = 'global'; // Can be region-specific, e.g., 'us-central1'
-    console.log('here');
 
     const targetLanguage = countryLanguages[target as keyof typeof countryLanguages] ?? 'pt-PT';
-    console.log(`Resolved target language code: ${targetLanguage}`);
     const translateRequest  = {
         parent: `projects/${projectId}/locations/${location}`,
         contents: [text],

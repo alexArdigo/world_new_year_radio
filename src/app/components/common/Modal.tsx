@@ -16,7 +16,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '100%',
+    width: '100vw',
     height: 600,
     bgcolor: `rgba(255, 255, 255, 0.95)`,
     opacity: 1,
@@ -25,8 +25,8 @@ const style = {
 };
 
 export default function TransitionsModal() {
-    const [open, setOpen] = React.useState(false);
-    const [clientWidth, setClientWidth] = React.useState(0);
+    const [open, setOpen] = useState(false);
+    const [clientWidth, setClientWidth] = useState(0);
 
     const handleClose = () => setOpen(false);
     const {countdown} = useCountdownStore();
@@ -37,7 +37,7 @@ export default function TransitionsModal() {
         toOpenModalEnd,
         toFinishCountdown,
         toCloseModal
-    } = timeStampZero(2630);
+    } = timeStampZero(1800);
     const [happyNewYearPhrase, setHappyNewYearPhrase] = useState('');
 
     React.useEffect(() => {
@@ -45,7 +45,7 @@ export default function TransitionsModal() {
         if (typeof window !== 'undefined') {
             setClientWidth(window.innerWidth);
         }
-    }, []);
+    }, [window.innerWidth]);
 
     React.useEffect(() => {
         const newFetch = async () => await fetchCountries(country);
