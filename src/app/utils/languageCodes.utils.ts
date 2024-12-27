@@ -1,4 +1,5 @@
 export const countryLanguages = {
+    "Açores": "pt-PT",
     "Afghanistan": "ps",
     "Albania": "sq",
     "Algeria": "ar",
@@ -65,6 +66,7 @@ export const countryLanguages = {
     "Germany": "de",
     "Ghana": "en",
     "Greece": "el",
+    "Greenland": "kl",
     "Grenada": "en",
     "Guatemala": "es",
     "Guinea": "fr",

@@ -30,13 +30,14 @@ export default function TransitionsModal() {
 
     const handleClose = () => setOpen(false);
     const {countdown} = useCountdownStore();
+    console.log('countdown', countdown);
     const {country, fetchCountries} = useCountryStore();
     const {
         toOpenModalStart,
         toOpenModalEnd,
         toFinishCountdown,
         toCloseModal
-    } = timeStampZero(0);
+    } = timeStampZero(2630);
     const [happyNewYearPhrase, setHappyNewYearPhrase] = useState('');
 
     React.useEffect(() => {
@@ -98,6 +99,7 @@ export default function TransitionsModal() {
                                     <Typography
                                         id="transition-modal-description"
                                         sx={{
+                                            textAlign: 'center',
                                             fontSize: 100,
                                             fontWeight: 600,
                                             textShadow: "1px 1px 1px #000"
@@ -116,18 +118,19 @@ export default function TransitionsModal() {
                                     component="h2"
                                     sx={{
                                         textAlign: 'center',
-                                        color: 'black',
+                                        color: '#3a32a8',
                                         margin: '30px'
                                     }}
                                 >
-                                    CONTAGEM REGRESSIVA, SEUS CONINHAS!
+                                    CONTAGEM REGRESSIVA, MALTA!
                                 </Typography>
                                 <Typography
                                     id="transition-modal-description"
                                     sx={{
                                         mt: 2,
                                         textAlign: 'center',
-                                        fontSize: 300
+                                        fontSize: 300,
+                                        textShadow: "1px 1px 1px #000"
                                     }}
                                 >
                                     {countdown % 100}

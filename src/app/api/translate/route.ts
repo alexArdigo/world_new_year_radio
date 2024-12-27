@@ -3,7 +3,7 @@ import { TranslationServiceClient } from '@google-cloud/translate';
 import {countryLanguages} from "@/app/utils/languageCodes.utils";
 
 const client = new TranslationServiceClient({
-    keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+    credentials: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_CONTENT || '{}'),
 });
 
 export async function POST(request: NextRequest) {
