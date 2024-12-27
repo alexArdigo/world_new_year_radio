@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
 
 
     const targetLanguage = countryLanguages[target as keyof typeof countryLanguages] ?? 'pt-PT';
-
+    console.log(`Resolved target language code: ${targetLanguage}`);
     const translateRequest  = {
         parent: `projects/${projectId}/locations/${location}`,
         contents: [text],
