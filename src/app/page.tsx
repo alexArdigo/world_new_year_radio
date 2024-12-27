@@ -13,8 +13,6 @@ export default function Home() {
                     <BackgroundImage/>
                     <MainContent/>
                 </Suspense>
-
-
             </div>
         </main>
     );

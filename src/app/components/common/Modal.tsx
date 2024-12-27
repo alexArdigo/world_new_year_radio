@@ -26,7 +26,7 @@ const style = {
 
 export default function TransitionsModal() {
     const [open, setOpen] = useState(false);
-    const [clientWidth, setClientWidth] = useState(0);
+    const [clientWidth, setClientWidth] = useState(window.innerWidth);
 
     const handleClose = () => setOpen(false);
     const {countdown} = useCountdownStore();
@@ -45,7 +45,7 @@ export default function TransitionsModal() {
         if (typeof window !== 'undefined') {
             setClientWidth(window.innerWidth);
         }
-    }, [window.innerWidth]);
+    }, [clientWidth]);
 
     React.useEffect(() => {
         const newFetch = async () => await fetchCountries(country);
