@@ -31,7 +31,7 @@ const MainContent = () => {
     }, [country, fetchRadios]);
 
     return (
-        <div className={'flex items-center flex-col absolute top-32'}>
+        <div className={'flex items-center flex-col absolute top-14'}>
             <CountryProvider>
                 <Header fetchCountries={fetchCountries} />
                 <CountdownCard />
