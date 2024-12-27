@@ -10,7 +10,7 @@ const Header = ({fetchCountries}: HeaderProps) => {
     const { countryNameTranslated } = country
 
     return (
-        <header className={'flex flex-col z-3 w-full h-full items-center mb-14'} style={{ textShadow: '0 2px 2px rgb(3, 3, 3)' }}>
+        <header className={'flex flex-col z-3 w-full h-full items-center mb-6'} style={{ textShadow: '0 2px 2px rgb(3, 3, 3)' }}>
             <div className={'flex h-24 items-start '}>
                 {!countryNameTranslated ?
                     <Loading/>
