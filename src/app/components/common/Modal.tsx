@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -8,7 +7,7 @@ import {useCountdownStore} from "@/app/stores/CountdownStore";
 import {useCountryStore} from "@/app/stores/CountryStore";
 import Confetti from "react-confetti";
 import {timeStampZero} from "@/app/utils/timeStampZero.utils";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {handleTranslate} from "@/app/utils/handleTranslate.utils";
 
 const style = {
@@ -26,7 +25,7 @@ const style = {
 
 export default function TransitionsModal() {
     const [open, setOpen] = useState(false);
-    const [clientWidth, setClientWidth] = useState(window.innerWidth);
+    const [clientWidth, setClientWidth] = useState(0);
 
     const handleClose = () => setOpen(false);
     const {countdown} = useCountdownStore();
@@ -40,14 +39,27 @@ export default function TransitionsModal() {
     } = timeStampZero(1800);
     const [happyNewYearPhrase, setHappyNewYearPhrase] = useState('');
 
-    React.useEffect(() => {
-        // Set the width only on the client-side
-        if (typeof window !== 'undefined') {
+    useEffect(() => {
+        // Function to update width
+        const handleResize = () => {
             setClientWidth(window.innerWidth);
-        }
-    }, [clientWidth]);
+        };
 
-    React.useEffect(() => {
+        // Set initial width
+        if (typeof window !== 'undefined') {
+            handleResize();
+
+            // Add event listener
+            window.addEventListener('resize', handleResize);
+
+            // Cleanup
+            return () => {
+                window.removeEventListener('resize', handleResize);
+            };
+        }
+    }, []);
+
+    useEffect(() => {
         const newFetch = async () => await fetchCountries(country);
 
         const handleTranslation = async () => {
