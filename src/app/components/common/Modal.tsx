@@ -36,7 +36,7 @@ export default function TransitionsModal() {
         toOpenModalEnd,
         toFinishCountdown,
         toCloseModal
-    } = timeStampZero(1800);
+    } = timeStampZero(0);
     const [happyNewYearPhrase, setHappyNewYearPhrase] = useState('');
 
     useEffect(() => {
