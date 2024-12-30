@@ -6,7 +6,7 @@ export const timeStampZero: TimeStampType = (zeroMarker) => {
         toOpenModalStart: zeroMarker + 20,
         countdownStart: zeroMarker + 10,
         toOpenModalEnd: zeroMarker + 1,
-        toCloseModal: zeroMarker === 0 ? fullHour - 30 : zeroMarker - 30,
+        toCloseModal: zeroMarker === 0 ? fullHour - 20 : zeroMarker - 20,
         toFinishCountdown: zeroMarker === 0 ? fullHour : zeroMarker,
 
     }
