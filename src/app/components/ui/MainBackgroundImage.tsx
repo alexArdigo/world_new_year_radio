@@ -16,6 +16,14 @@ const BackgroundImage = () => {
     const { loading, setLoading } = useLoadingStore();
     const { setLoadingPage } = useLoadingPageStore();
 
+    const handleError = async () => {
+        const imageFallback = await getBackgroundImage(country, true);
+        if (imageFallback?.data) {
+            setImgURL(imageFallback.data);
+            setLoadingPage(prev => !prev);  // Set page loading state
+        }
+    }
+
     // Fetch background image, handle PBError internally
     const getBGImage = useCallback(async (country: Country) => {
         if (!country) return;
@@ -28,14 +36,11 @@ const BackgroundImage = () => {
             }
         } catch (error) {
             console.error('Error fetching background image:', error);
-            // If an error occurs, try fetching again with PBError as true
-            const imageFallback = await getBackgroundImage(country, true);
-            if (imageFallback?.data) {
-                setImgURL(imageFallback.data);
-                setLoadingPage(prev => !prev);  // Set page loading state
-            }
+
         }
     }, [setLoadingPage]);
+    
+
 
     // Initial image loading and periodic reload
     useEffect(() => {
@@ -80,13 +85,18 @@ const BackgroundImage = () => {
             ) : (
                 <Image
                     src={imgURL}
-                    alt="Country image"
+                    alt=""
                     fill
                     style={{
                         objectFit: 'cover',
                         objectPosition: 'center'
                     }}
                     onLoad={() => setLoading(false)}
+                    onError={
+                        () => {
+                            handleError();
+                        }
+                    }
                     className="relative z-0"
                 />
             )}

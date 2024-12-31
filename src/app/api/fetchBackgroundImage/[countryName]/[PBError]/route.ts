@@ -38,8 +38,8 @@ export async function GET(
             }
 
             hits = (await pixabayResponse.json())?.hits ?? [];
-
         }
+
         if (!hits?.length || hasPBError) {
             // Unsplash fallback
             const unsplashUrl = `${process.env.UNSPLASH_PATH}/search/photos?page=1&query=${countryName}&client_id=${process.env.UNSPLASH_CLIENT_ID}`;
@@ -63,9 +63,11 @@ export async function GET(
             }
 
             const data = getImageUrl(randomPicture(results)); // Get Unsplash image URL
+
             return NextResponse.json({ data }, { status: 200 });
         } else {
             const data = getImageUrl(randomPicture(hits)); // Get Pixabay image URL
+
             return NextResponse.json({ data }, { status: 200 });
         }
 

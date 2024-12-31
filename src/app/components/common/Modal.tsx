@@ -29,7 +29,7 @@ export default function TransitionsModal() {
 
     const handleClose = () => setOpen(false);
     const {countdown} = useCountdownStore();
-    console.log('countdown', countdown);
+    //console.log('countdown', countdown);
     const {country, fetchCountries} = useCountryStore();
     const {
         toOpenModalStart,

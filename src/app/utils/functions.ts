@@ -6,6 +6,8 @@ export const buildQueryParams = (params: QueryBuilderProps) => {
         .join('&');
 };
 
+
+
 export function getImageUrl(picture: UnsplashResult | PixabayHit): string {
     if ('urls' in picture) {
         return picture.urls.raw; // Unsplash

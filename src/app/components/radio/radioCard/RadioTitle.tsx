@@ -7,7 +7,7 @@ const RadioTitle = () => {
 
     return (
         <div className={'flex flex-col z-3 w-full h-32 items-center justify-center'}>
-            <h3>{title}</h3>
+            <h3 className={'text-nowrap'}>{title}</h3>
             <p className={'text-2xl'}>{subtitle}</p>
         </div>
     );
