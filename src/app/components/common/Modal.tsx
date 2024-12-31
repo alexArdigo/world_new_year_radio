@@ -142,7 +142,8 @@ export default function TransitionsModal() {
                                         mt: 2,
                                         textAlign: 'center',
                                         fontSize: 300,
-                                        textShadow: "1px 1px 1px #000"
+                                        textShadow: "1px 1px 1px #000",
+                                        color: `${countdown <= 10 && countdown >= 0 ? '#ff0000' : '#000'}`
                                     }}
                                 >
                                     {countdown % 100}
