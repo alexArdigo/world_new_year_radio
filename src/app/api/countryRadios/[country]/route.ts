@@ -12,7 +12,8 @@ export const GET = async (
     try {
 
         const {country} = params;
-        const {countryName, countryNameTranslated, zoneName} = await JSON.parse(country);
+        const countryData = JSON.parse(decodeURIComponent(country));
+        const { countryName, countryNameTranslated, zoneName } = countryData;
 
         const radioData = await getRadioInfo(countryName, countryNameTranslated);
 
