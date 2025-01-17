@@ -70,7 +70,7 @@ const BackgroundImage = () => {
         <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
             {loading && (
                 <Image
-                    src="/images/Hero_2.jpeg"
+                    src="/images/Flag-map_of_the_world.png"
                     alt="Country image"
                     fill
                     style={{
